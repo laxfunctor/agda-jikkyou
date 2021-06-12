@@ -117,3 +117,38 @@ module Nat where
       === suc m + suc m * n by[ refl ]
       === suc m + n * suc m by[ add= (commutativity* {suc m} {n}) ]
       === suc n * suc m by[ refl ]
+
+  L-distr : ∀ {l m n : ℕ} → l * (m + n) == l * m + l * n
+  L-distr {zero} {m} {n} = refl
+  L-distr {suc l} {m} {n} =
+    proof==
+      (suc l * (m + n))
+      === (m + n) + l * (m + n) by[ refl ]
+      === (m + n) + (l * m + l * n) by[ add= (L-distr {l} {m} {n}) ]
+      === ((m + n) + l * m) + l * n by[ ==sym (associativity+ {m + n}) ]
+      === (m + (n + l * m)) + l * n by[ =add {l * n} (associativity+ {m} {n}) ]
+      === (m + (l * m + n)) + l * n by[ =add {l * n} (add= {m} (commutativity+ {n} {l * m})) ]
+      === (m + l * m + n) + l * n by[ =add {l * n} (==sym (associativity+ {m} {l * m} {n})) ]
+      === (suc l * m + n) + l * n by[ refl ]
+      === suc l * m + (n + l * n) by[ associativity+ {suc l * m} {n} {l * n} ]
+      === (suc l * m + suc l * n) by[ refl ]
+
+  R-distr : ∀ {l m n : ℕ} → (m + n) * l == m * l + n * l
+  R-distr {l} {m} {n} =
+    proof==
+      ((m + n) * l)
+      === l * (m + n) by[ commutativity* {m + n} ]
+      === l * m + l * n by[ L-distr {l}]
+      === m * l + l * n by[ =add {l * n} (commutativity* {l} {m}) ]
+      === m * l + n * l by[ add= {m * l} (commutativity* {l} {n}) ]
+
+  associativity* : ∀ {l m n : ℕ} → (l * m) * n == l * (m * n)
+  associativity* {zero} {m} {n} = refl
+  associativity* {suc l} {m} {n} =
+    proof==
+      ((suc l * m) * n)
+      === (m + l * m) * n by[ refl ]
+      === (m * n + (l * m) * n) by[ R-distr {n} {m} {l * m} ]
+      === (m * n + l * (m * n)) by[ add= {m * n} (associativity* {l} {m} {n}) ]
+      === suc l * (m * n) by[ refl ]
+  
