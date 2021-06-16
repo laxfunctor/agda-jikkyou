@@ -15,7 +15,7 @@
 ```
 $ sudo install emacs zlib1g-dev libncurses5-dev cabal
 $ cabal v2-update
-$ cabal v2-install Agdacabal:
+$ cabal v2-install Agda
 ```
 もし、以下のようなエラーメッセージが出てきたら、
 ```
