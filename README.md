@@ -29,6 +29,11 @@ getDirectoryContents:openDirStream: does not exist (No such file or directory)
 ```
 $ mkdir -p ~/.cabal/store/ghc-8.6.5/package.db
 ```
+`~/.bashrc` に
+```
+export PATH=$PATH:/home/username/.cabal/bin/
+```
+を追加する。
 
 Emacs で agda-mode を使うには
 ```
