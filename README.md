@@ -13,7 +13,7 @@
 ### Ubuntu 20.04 でのインストール方法
 
 ```
-$ sudo install emacs zlib1g-dev libncurses5-dev cabal
+$ sudo apt install emacs zlib1g-dev libncurses5-dev cabal-install
 $ cabal v2-update
 $ cabal v2-install Agda
 ```
